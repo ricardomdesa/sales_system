@@ -1,0 +1,4 @@
+.idea/
+__pycache__/
+sales_db.db
+venv/
