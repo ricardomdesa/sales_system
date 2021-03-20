@@ -1,7 +1,10 @@
-from prettytable import PrettyTable
-from model import Seller, Sale, init_db
-import sys, os
+import os
+import sys
 from datetime import datetime
+
+from prettytable import PrettyTable
+
+from model import Seller, Sale, init_db
 
 
 def validate_fields(sale_costumer, sale_date, sale_name, sale_value):
@@ -134,15 +137,23 @@ def delete_sale():
     sale_id = int(input('Select the Sale id to delete: '))
     sale_to_del = Sale.query.filter_by(id=sale_id).first()
     if sale_to_del:
-        # update the amount sales of seller
-        seller = Seller.query.filter_by(id=sale_to_del.seller_id).first()
-        seller.amount_sales -= sale_to_del.sale_value
-        seller.save()
+        sale_table = PrettyTable(['Sale id', 'Seller name', 'Customer name', 'Sale Item Name', 'Date of sale',
+                                  'sale value'])
+        sale_table.add_row([sale_to_del.id, sale_to_del.seller.seller_name, sale_to_del.customer_name,
+                            sale_to_del.sale_name, sale_to_del.sale_date, sale_to_del.sale_value])
+        print(sale_table)
+        if input('\nConfirm delete the Sale above? (y, n)') == 'y':
+            # update the amount sales of seller
+            seller = Seller.query.filter_by(id=sale_to_del.seller_id).first()
+            seller.amount_sales -= sale_to_del.sale_value
+            seller.save()
 
-        # delete sale
-        sale_to_del.delete()
-        print_sales()
-        resp = f'Sale with id {sale_id} deleted'
+            # delete sale
+            sale_to_del.delete()
+            print_sales()
+            resp = f'Sale with id {sale_id} deleted'
+        else:
+            resp = 'Sale not deleted'
     else:
         resp = f'Sale with id {sale_id} not found'
     return resp
