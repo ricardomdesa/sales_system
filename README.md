@@ -1,4 +1,5 @@
-# sales_system
+# Sales System
+
 System to add/edit/remove Sales and ranking Sellers sales.
 
 Developed in python 3. 
