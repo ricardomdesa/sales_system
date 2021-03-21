@@ -19,7 +19,7 @@ Optionally: python virtualenv
 **Clone the github repository**
 
 ````bash
-git clone <url repo>
+git clone https://github.com/ricardomdesa/sales_system.git
 ````
 **Install libraries**
 
