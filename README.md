@@ -41,9 +41,9 @@ pip install -r requirements.txt
 ````bash
 python3 main.py
 ````
+**The terminal should be displayed as the image below:**
 
-
-
+![Alt text](imgs_readme/sales_sys.jpg?raw=true "Sales system")
 
 
 
